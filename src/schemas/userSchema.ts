@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { contactSchema, contactReturnSchema, contactReadSchema } from "./contactSchema";
+import { contactReturnSchema, contactReadSchema } from "./contactSchema";
 
 const userSchema = z.object({
     id: z.string(),

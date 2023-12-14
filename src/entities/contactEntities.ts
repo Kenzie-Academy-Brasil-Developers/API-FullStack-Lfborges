@@ -7,7 +7,7 @@ export class Contact extends BaseEntity {
     id:number;
 
     @Column({type: "varchar", length: 255, nullable: false})
-    fullname: string;
+    full_name: string;
 
     @Column({type: "varchar", length: 255, nullable: false})
     email: string;

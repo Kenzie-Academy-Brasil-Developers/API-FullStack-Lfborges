@@ -2,7 +2,7 @@ import { z } from "zod";
 import { contactReturnSchema, contactReadSchema } from "./contactSchema";
 
 const userSchema = z.object({
-    id: z.string(),
+    id: z.number(),
     full_name: z.string().max(255),
     email: z.string().max(255).email(),
     password: z.string().max(255),

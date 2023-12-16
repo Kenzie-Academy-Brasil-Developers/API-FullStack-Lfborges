@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { UserCreate, UserUpdate, UserReturn } from "interfaces/userInterface";
 import User from "../entities/userEntities";
-import { AppDataSource } from "dataSource";
+import { AppDataSource } from "data-source";
 import { userReadSchema, userReturnSchema } from "../schemas/userSchema";
 import { Contact } from "../entities";
 import { ContactCreate } from "interfaces/contactInterface";

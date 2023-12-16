@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { SessionCreate, SessionReturn } from "interfaces/sessionInterface";
 import User from "../entities/userEntities";
-import { AppDataSource } from "dataSource";
+import { AppDataSource } from "data-source";
 import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import "dontenv/config";

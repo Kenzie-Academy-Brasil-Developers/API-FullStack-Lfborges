@@ -1,8 +1,8 @@
 import express from 'express';
-import { userController } from 'controllers';
-import { validateBody, validateToken, checkUserId, checkEmailExist, cheackDuplicateContact } from 'middlewares';
-import { userCreateSchema } from 'schemas/userSchema';
-import { contactCreateSchema } from 'schemas/contactSchema';
+import { userController } from '../controllers';
+import { validateBody, validateToken, checkUserId, checkEmailExist, cheackDuplicateContact } from '../middlewares';
+import { userCreateSchema } from '../schemas/userSchema';
+import { contactCreateSchema } from '../schemas/contactSchema';
 
 const userRouter = express.Router();
 

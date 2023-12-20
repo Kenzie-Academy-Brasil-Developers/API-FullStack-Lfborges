@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
-import { ContactCreate, ContactRead, ContactReturn, ContactUpdate } from "interfaces/contactInterface";
+import { ContactCreate, ContactRead, ContactReturn, ContactUpdate } from "../interfaces/contactInterface";
 import Contact from "../entities/contactEntities";
-import { AppDataSource } from "data-source";
+import { AppDataSource } from "../data-source";
 import { contactReadSchema, contactReturnSchema } from "../schemas/contactSchema";
 
 const createContact = async (payload: ContactCreate): Promise<ContactReturn> => {

@@ -1,7 +1,7 @@
 import express from 'express';
-import { contactController } from 'controllers';
-import { validateBody, validateContactUser, validateToken, checkUserId, cheackDuplicateContact } from 'middlewares';
-import { contactCreateSchema } from 'schemas/contactSchema';
+import { contactController } from '../controllers';
+import { validateBody, validateContactUser, validateToken, checkUserId, cheackDuplicateContact } from '../middlewares';
+import { contactCreateSchema } from '../schemas/contactSchema';
 
 const contactRouter = express.Router();
 

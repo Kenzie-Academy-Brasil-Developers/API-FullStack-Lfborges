@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
 import { contactService } from "../services";
-import { ContactCreate, ContactRead, ContactReturn, ContactUpdate } from "interfaces/contactInterface";
+import { ContactCreate, ContactRead, ContactReturn, ContactUpdate } from "../interfaces/contactInterface";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const payload: ContactCreate = req.body;

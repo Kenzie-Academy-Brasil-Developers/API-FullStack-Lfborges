@@ -1,7 +1,7 @@
 import express from 'express';
 import { login } from '../controllers/sessionController';
-import { validateBody } from 'middlewares';
-import { sessionCreateSchema } from 'schemas/sessionSchema';
+import { validateBody } from '../middlewares';
+import { sessionCreateSchema } from '../schemas/sessionSchema';
 
 const loginRouter = express.Router();
 

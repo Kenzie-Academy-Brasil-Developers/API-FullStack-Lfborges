@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { userService } from "../services";
-import { UserCreate, UserRead, UserReturn, UserUpdate } from "interfaces/userInterface";
-import { ContactCreate, ContactReturn } from "interfaces/contactInterface";
+import { UserCreate, UserRead, UserReturn, UserUpdate } from "../interfaces/userInterface";
+import { ContactCreate, ContactReturn } from "../interfaces/contactInterface";
+import { userController } from "controllers";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const payload: UserCreate = req.body;

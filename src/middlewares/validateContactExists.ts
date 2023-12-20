@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Contact } from '../entities/contactEntities';
-import { contactCreateSchema } from 'schemas/contactSchema';
-import { AppDataSource } from 'data-source';
+import { contactCreateSchema } from '../schemas/contactSchema';
+import { AppDataSource } from '../data-source';
 
 const cheackDuplicateContact = async(
     req: Request,

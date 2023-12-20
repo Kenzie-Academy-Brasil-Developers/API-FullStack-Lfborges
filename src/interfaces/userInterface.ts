@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { userSchema, userCreateSchema, userReadSchema, userReturnSchema, userUpdateSchema } from "schemas/userSchema";
+import { userSchema, userCreateSchema, userReadSchema, userReturnSchema, userUpdateSchema } from "../schemas/userSchema";
 import { DeepPartial } from "typeorm";
 
 type Users = z.infer<typeof userSchema>;

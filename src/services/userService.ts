@@ -1,10 +1,10 @@
 import { Repository } from "typeorm";
 import { UserCreate, UserUpdate, UserReturn } from "interfaces/userInterface";
 import User from "../entities/userEntities";
-import { AppDataSource } from "data-source";
+import { AppDataSource } from "../data-source";
 import { userReadSchema, userReturnSchema } from "../schemas/userSchema";
 import { Contact } from "../entities";
-import { ContactCreate } from "interfaces/contactInterface";
+import { ContactCreate } from "../interfaces/contactInterface";
 
 const createUser = async (payload: UserCreate): Promise<UserReturn> => {
     const repository: Repository<User> = AppDataSource.getRepository(User);

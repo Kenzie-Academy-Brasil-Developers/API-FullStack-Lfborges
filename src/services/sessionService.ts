@@ -30,8 +30,8 @@ const login = async (payload: SessionCreate): Promise<SessionReturn> => {
     }
 
     const token: string = jwt.sign(
-        {userId: user.id, registrationDate: user. registration_date},
-        process.env.SCRET_KEY!,
+        {userId: user.id, registrationDate: user.registration_date},
+        process.env.SECRET_KEY!,
         {
             expiresIn: process.env.EXPIRES_IN,
         }

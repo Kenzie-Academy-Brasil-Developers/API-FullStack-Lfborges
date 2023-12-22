@@ -22,7 +22,7 @@ const handleError = (
     }
     
     if (err instanceof JsonWebTokenError) {
-        return res.status(400).json({
+        return res.status(401).json({
             message: err.message,
         });
     }

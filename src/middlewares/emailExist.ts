@@ -14,7 +14,7 @@ const checkEmailExist = async (
     const existUser = await userRepository.findOne({where: {email}});
 
     if(existUser){
-        return res.status(409).json({error: 'E-mail already in use'});
+        return res.status(400).json({error: 'E-mail already in use'});
     }
 
     next();

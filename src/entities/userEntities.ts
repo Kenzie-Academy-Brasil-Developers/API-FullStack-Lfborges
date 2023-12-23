@@ -1,7 +1,16 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, CreateDateColumn, DeleteDateColumn} from "typeorm";
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToMany,
+  CreateDateColumn,
+  DeleteDateColumn,
+} from "typeorm";
 import bcrypt from "bcryptjs";
 import { Contact } from "./contactEntities";
-
 @Entity("users")
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()

@@ -8,7 +8,7 @@ const userRouter = express.Router();
 
 
 userRouter.post("/", validateBody(userCreateSchema), checkEmailExist, userController.create);
-userRouter.get("/", validateToken, userController.read);
+userRouter.get("/", userController.read);
 userRouter.patch("/:userId", validateToken, checkUserId, userController.update);
 userRouter.delete("/:UserId", validateToken, checkUserId, userController.destroy);
 userRouter.post("/:userId/contacts", validateToken, validateBody(contactCreateSchema), cheackDuplicateContact, userController.addContact);

@@ -1,149 +1,158 @@
+// services/userService.ts
 import { Repository } from "typeorm";
-import { UserCreate, UserUpdate, UserReturn } from "interfaces/userInterface";
+import {CreateUser, ReadUser, ReturnUser, UpdateUser} from "../interfaces/userInterfaces";
 import User from "../entities/userEntities";
 import { AppDataSource } from "../data-source";
-import { userReadSchema, userReturnSchema } from "../schemas/userSchema";
+import { userSchemaReturn, userSchemaRead } from "../schemas/userSchemas";
+import { CreateContact } from "interfaces/contactInterface";
 import { Contact } from "../entities";
-import { ContactCreate } from "../interfaces/contactInterface";
 
-const createUser = async (payload: UserCreate): Promise<UserReturn> => {
-    const repository: Repository<User> = AppDataSource.getRepository(User);
+const createUser = async (payload: CreateUser): Promise<ReturnUser> => {
+  const repository: Repository<User> = AppDataSource.getRepository(User);
 
-    const createUser: User = repository.create({...payload, contacts: []});
-    console.log(createUser);
+  const createdUser: User = repository.create({ ...payload, contacts: [] });
+  console.log(createdUser);
 
-    await repository.save(createUser);
+  await repository.save(createdUser);
 
-    const result: UserReturn = userReturnSchema.parse(createUser);
+  const result: ReturnUser = userSchemaReturn.parse(createdUser);
 
-    return result;
+  return result;
 };
 
-const readUsers = async (): Promise<UserReturn[]> => {
-    const userRepository: Repository<User> = AppDataSource.getRepository(User);
+const readUsers = async (): Promise<ReturnUser[]> => {
+  const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-    const users: User[] = await userRepository.find({relations: ["contacts"]});
+  const users: User[] = await userRepository.find({ relations: ["contacts"]});
 
-    const result: UserReturn[] = userReadSchema.parse(users);
 
-    return result;
-}
+  const result: ReturnUser[] = userSchemaRead.parse(users)
+
+  return result;
+};
 
 const updateUser = async (
-    id: number,
-    payload: UserUpdate
-): Promise<UserReturn> => {
-    const repository: Repository<User> = AppDataSource.getRepository(User);
+  id: number,
+  payload: UpdateUser
+): Promise<ReturnUser> => {
+  const repository: Repository<User> = AppDataSource.getRepository(User);
+  console.log(id);
 
-    const foundUser: User | null = await repository.findOne({
-        where: {
-            id: id,
-        }, relations:{contacts: true}
-    });
-    const user: User = repository.create({
-        ...foundUser,
-        ...payload,
-    });
-    console.log(user);
-    
-    await repository.save(user);
+  const foundUser: User | null = await repository.findOne({
+    where: {
+      id: id,
+    },relations:{contacts:true}
+  });
+  const user: User = repository.create({
+    ...foundUser,
+    ...payload,
+  });
+  console.log(user);
+  
+  await repository.save(user);
 
-    const result: UserReturn = userReturnSchema.parse(user);
-    return result;
+  const result: ReturnUser = userSchemaReturn.parse(user);
+  return result;
 };
 
-const destroyUser = async (id: number): Promise<void> =>{
-    const repository: Repository<User> = AppDataSource.getRepository(User);
+const destroyUser = async (id: number): Promise<void> => {
+  const repository: Repository<User> = AppDataSource.getRepository(User);
 
-    const user: User | null = await repository.findOne({
-        where:{
-            id:id,
-        },
-    });
-    await repository.softRemove(user!);
+  const user: User | null = await repository.findOne({
+    where: {
+      id: id,
+    },
+  });
+  await repository.softRemove(user!);
 };
 
-const addContact = async(
-    userId: number,
-    payload: ContactCreate
-): Promise<UserReturn> =>{
-    const userRepository: Repository<User> = AppDataSource.getRepository(User);
-    const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
+const addContact = async (
+  userId: number,
+  payload: CreateContact
+): Promise<ReturnUser> => {
+  const userRepository: Repository<User> = AppDataSource.getRepository(User);
+  const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
 
-    const user: User | null = await userRepository
+  const user: User | null = await userRepository
     .createQueryBuilder("user")
     .leftJoinAndSelect("user.contacts", "contacts")
-    .where("user.id = :userid", {userId})
+    .where("user.id = :userId", { userId })
     .getOne();
 
-    if(!user){
-        return {} as UserReturn;
-    }
+  if (!user) {
+    return {} as ReturnUser;
+  }
 
-    const newContact = new Contact();
-    newContact.full_name = payload.full_name;
-    newContact.email = payload.email;
-    newContact.phone_number = payload.phone_number;
+  const newContact = new Contact();
+  newContact.full_name = payload.full_name;
+  newContact.email = payload.email;
+  newContact.phone_number = payload.phone_number;
 
-    user.contacts.push(newContact);
+  user.contacts.push(newContact);
 
-    await contactRepository.save(newContact);
-    await userRepository.save(user);
+  await contactRepository.save(newContact);
+  await userRepository.save(user);
 
-    const result: UserReturn = userReturnSchema.parse(user);
+  const result: ReturnUser = userSchemaReturn.parse(user);
 
-    return result;
+  return result;
 };
 
-const removeContact = async(
-    userId: number,
-    contactId: number
-): Promise<UserReturn | null> =>{
-    const userRepository: Repository<User> = AppDataSource.getRepository(User);
+const removeContact = async (
+  userId: number,
+  contactId: number
+): Promise<ReturnUser | null> => {
+  const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-    const user: User | null = await userRepository
+  const user: User | null = await userRepository
     .createQueryBuilder("user")
     .leftJoinAndSelect("user.contacts", "contacts")
-    .where("user.id = :userid", {userId})
+    .where("user.id = :userId", { userId })
     .getOne();
 
-    if(!user){
-        return null;
-    }
+  if (!user) {
+    return null;
+  }
 
-    const contactRemoveIndex = user.contacts.findIndex(
-        (contact) => contact.id === contactId
-    );
-    
-    if(contactRemoveIndex === -1){
-        return null;
-    }
+  const contactToRemoveIndex = user.contacts.findIndex(
+    (contact) => contact.id === contactId
+  );
 
-    user.contacts.splice(contactRemoveIndex, 1);
+  if (contactToRemoveIndex === -1) {
+    return null;
+  }
 
-    await userRepository.save(user);
+  user.contacts.splice(contactToRemoveIndex, 1);
 
-    const formattedContacts = user.contacts.map((contact) =>({
-        id: contact.id,
-        full_name: contact.full_name,
-        email: contact.email,
-        phone_number: contact.phone_number,
-        registration_date: contact.registration_date,
-        delete_date: contact.delete_date,
-    }));
+  await userRepository.save(user);
 
-    const result: UserReturn = {
-        id: user.id,
-        full_name: user.full_name,
-        email: user.email,
-        phone_number: user.phone_number,
-        registration_date: user.registration_date,
-        delete_date: user.delete_date,
-        contacts: formattedContacts,
-    };
+  const formattedContacts = user.contacts.map((contact) => ({
+    id: contact.id,
+    full_name: contact.full_name,
+    email: contact.email,
+    phone_number: contact.phone_number,
+    registration_date: contact.registration_date,
+    delete_date: contact.delete_date,
+  }));
 
-    return result;
-}
+  const result: ReturnUser = {
+    id: user.id,
+    full_name: user.full_name,
+    email: user.email,
+    phone_number: user.phone_number,
+    registration_date: user.registration_date,
+    delete_date: user.delete_date,
+    contacts: formattedContacts,
+  };
 
-export default { createUser, readUsers, updateUser, destroyUser, addContact, removeContact };
+  return result;
+};
 
+export default {
+  createUser,
+  readUsers,
+  updateUser,
+  addContact,
+  destroyUser,
+  removeContact,
+};

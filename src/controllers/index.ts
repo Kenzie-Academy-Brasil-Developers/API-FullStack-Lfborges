@@ -1,5 +1,7 @@
-import * as userController from './userConttroller';
-import * as sessionController from './sessionController';
+// controllers/index.ts
+import * as userController from './userController';
 import * as contactController from './contactController';
+import * as loginController from './sessionController';
 
-export { userController, sessionController, contactController};
+export { userController, contactController, loginController };
+

@@ -1,8 +1,15 @@
-import checkEmailExist from "./emailExist";
+import checkEmailExists from "./emailExists";
 import validateBody from "./validateBody";
-import validateToken from "./validateToken";
 import validateContactUser from "./validateContact";
-import cheackDuplicateContact from "./validateContactExists";
+import checkDuplicateContact from "./validateContactExists";
 import checkUserId from "./validateId";
+import validateToken from "./validateToken";
 
-export { checkEmailExist, validateBody, validateToken, validateContactUser, cheackDuplicateContact, checkUserId}
+export {
+  checkDuplicateContact,
+  validateBody,
+  checkEmailExists,
+  validateContactUser,
+  validateToken,
+  checkUserId,
+};

@@ -1,7 +1,10 @@
 import { z } from "zod";
-import { sessionCreateSchema, sessionReturnSchema } from "../schemas/sessionSchema";
+import {
+  sessionSchemaCreate,
+  sessionSchemaReturn,
+} from "../schemas/sessionSchemas";
 
-type SessionCreate = z.infer<typeof sessionCreateSchema>;
-type SessionReturn = z.infer<typeof sessionReturnSchema>;
+type SessionCreate = z.infer<typeof sessionSchemaCreate>;
+type SessionReturn = z.infer<typeof sessionSchemaReturn>;
 
-export { SessionCreate, SessionReturn }
+export { SessionCreate, SessionReturn };

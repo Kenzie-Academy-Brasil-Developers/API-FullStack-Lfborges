@@ -16,6 +16,12 @@ const read = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(users);
 };
 
+const reatrive = async (req: Request, res: Response): Promise<Response> => {
+  const id: number = Number(req.params.userId);
+  const user = await userService.reatriveUser(id);
+  return res.status(200).json(user);
+};
+
 const update = async (req: Request, res: Response): Promise<Response> => {
   const id: number = Number(req.params.userId);
   const payload: UpdateUser = req.body;
@@ -40,6 +46,13 @@ const addContact = async (req: Request, res: Response): Promise<Response> => {
   return res.status(201).json(newContact);
 };
 
+const reatriveContact = async (req: Request, res: Response): Promise<Response> => {
+  const userId: number = Number(req.params.userId);
+  const contactId: number = Number(req.params.contactId);
+  const contact = await userService.reatriveContact(userId, contactId);
+  return res.status(200).json(contact);
+};
+
 const removeContact = async (req: Request, res: Response): Promise<void> => {
   const userId: number = Number(req.params.userId);
   const contactId: number = parseInt(req.params.contactId, 10);
@@ -51,4 +64,4 @@ const removeContact = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { create, read, update, destroy, addContact, removeContact  };
+export { create, read, update, reatrive, destroy, addContact, removeContact, reatriveContact };

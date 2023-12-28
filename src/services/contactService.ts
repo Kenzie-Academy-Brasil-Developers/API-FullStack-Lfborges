@@ -55,7 +55,6 @@ const updateContact = async (id: number, payload: UpdateContact): Promise<Return
       ...payload,
     });
   await repository.save(contact);
-
   const result: ReturnContact = contactSchemaReturn.parse(contact);
   return result;
 };

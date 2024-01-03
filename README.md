@@ -6,7 +6,7 @@ Podemos acessar um usuário específico e ler todos seus contatos pelo token:
 
 Caso dê tudo certo, a resposta será assim:
 
-<h2 align ='center'> Listando usuários com token</h2>
+<h2 align ='center'> Listando usuários</h2>
 
 `GET /users - FORMATO DA RESPOSTA - STATUS 200`
 

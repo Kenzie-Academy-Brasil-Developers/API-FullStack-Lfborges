@@ -1,11 +1,6 @@
 // services/userService.ts
 import { Repository } from "typeorm";
-import {
-  CreateUser,
-  ReadUser,
-  ReturnUser,
-  UpdateUser,
-} from "../interfaces/userInterfaces";
+import { CreateUser, ReadUser, ReturnUser, UpdateUser} from "../interfaces/userInterfaces";
 import User from "../entities/userEntities";
 import { AppDataSource } from "../data-source";
 import { userSchemaReturn, userSchemaRead } from "../schemas/userSchemas";

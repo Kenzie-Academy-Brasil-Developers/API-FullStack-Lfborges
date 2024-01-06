@@ -1,4 +1,19 @@
-## **Endpoints**
+## **Descrição**
+
+Nesse início, é necessário usar o npm install para instalar as dependências do package.json necessárias. 
+
+logo depois fazer uma data base no psql fazer o .env
+```
+Exemplo de como deve ficar
+
+PORT=3000
+
+DATABASE_URL=postgres://Luis:1234@localhost:5432/api_fullstack
+SECRET_KEY="SECRET_KEY"
+EXPIRES_IN= 30d
+```
+
+feito isso pode testar tudo certinho 
 
 A API tem um total de 9 endpoints, sendo em volta principalmente do usuário (dev) - podendo cadastrar seu perfil, contatos e suas informacoes. <br/>
 

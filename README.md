@@ -1,6 +1,6 @@
 ## **Descrição**
 
-Nesse início, é necessário usar o npm install para instalar as dependências do package.json necessárias. 
+Nesse início, é necessário usar o ```npm install``` para instalar as dependências do package.json necessárias. 
 
 logo depois fazer uma data base no psql fazer o .env
 ```
